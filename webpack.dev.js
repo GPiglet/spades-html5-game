@@ -1,3 +1,4 @@
+const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
@@ -13,6 +14,9 @@ module.exports = (env) => {
     },
     devServer: {
       host: '0.0.0.0',
+      static: {
+        directory: path.join(__dirname, 'src/public'),
+      },
     },
   });
 };
