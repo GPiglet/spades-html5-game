@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import testController from "../../controllers/test";
 import Player from "../Player";
 import Card from "../Widgets/Card";
 import Hint from "../Widgets/Hint";
@@ -133,7 +134,7 @@ class DealGround {
 
   Deal() {
     //get from service
-    const dealer: number = 0;
+    const dealer: number = 2;
     const myCards: Array<CardType> = [
       CardType.Diamond2, 
       CardType.Heart3, 
@@ -162,6 +163,11 @@ class DealGround {
     this.players.forEach( (player) => {
       if( player.isMine() ) player.playSortEffect();
     })
+
+    //only for test
+    setTimeout(() => {
+      testController.onBid(this);
+    }, 1000);
   }
 
 }
