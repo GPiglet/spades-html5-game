@@ -1,3 +1,4 @@
+import gsap from "gsap";
 import CardFactory, { CardType } from '../Board/CardFactory';
 import Bubble from '../Widgets/Bubble';
 import Card from '../Widgets/Card';
@@ -141,6 +142,20 @@ class Player {
 
   isMine() {
     return this.position == 'bottom'
+  }
+
+  playSortEffect() {
+    const originCards = [...this.cards];
+    this.cards.sort((a, b) => a.cardType-b.cardType).forEach( (card, i) => {
+      const cardElement = card.getElement();
+      cardElement.style.zIndex = '' + i;
+      const rect1 = originCards[i].getElement().getBoundingClientRect(), rect2 = cardElement.getBoundingClientRect();
+      gsap.to(cardElement, {duration: 0.8, x: rect1.x - rect2.x});
+    });
+  }
+
+  onCompleteSort() {
+
   }
 }
 
