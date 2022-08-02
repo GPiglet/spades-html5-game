@@ -25,6 +25,7 @@ module.exports = (env) => {
               options: {
                 importLoaders: 1,
                 sourceMap: isDev,
+                url: false,
               }
             },
             'postcss-loader'
@@ -35,21 +36,25 @@ module.exports = (env) => {
           loader: 'ts-loader',
           exclude: /node_modules/
         },
-        {
-          test: /\.svg$/,
-          use: 'file-loader'
-        },
-        {
-          test: /\.png$/,
-          use: [
-            {
-              loader: 'url-loader',
-              options: {
-                mimetype: 'image/png'
-              }
-            }
-          ]
-        },
+        // {
+        //   test: /\.svg$/,
+        //   use: 'file-loader'
+        // },
+        // {
+        //   test: /\.svg/,
+        //   type: 'asset/resource'
+        // },
+        // {
+        //   test: /\.png$/,
+        //   use: [
+        //     {
+        //       loader: 'url-loader',
+        //       options: {
+        //         mimetype: 'image/png'
+        //       }
+        //     }
+        //   ]
+        // },
       ]
     },
     plugins: [
