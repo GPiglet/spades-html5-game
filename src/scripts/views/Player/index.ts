@@ -158,6 +158,18 @@ class Player {
       const rect1 = originCards[i].getElement().getBoundingClientRect(), rect2 = cardElement.getBoundingClientRect();
       gsap.to(cardElement, {duration: 0.8, x: rect1.x - rect2.x});
     });
+
+    setTimeout(() => {
+      this.cards.forEach( (card, i) => {
+        const cardElement = card.getElement();
+        gsap.set(cardElement, {x: 0});
+        cardElement.style.zIndex = '0';
+      })
+
+      this.cards.forEach( (card, i) => {
+        this.cards[i] = card.copyDOMFrom(originCards[i]);
+      })
+    }, 1000);
   }
 
   onSelectBid(level: number) {
