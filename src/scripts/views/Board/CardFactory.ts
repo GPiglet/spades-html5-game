@@ -3,35 +3,35 @@ export enum  CardType {
   Blank = 0,
   JokerA,
   JokerB,
-  HeartA, Heart2, Heart3, Heart4, Heart5, Heart6, Heart7, Heart8, Heart9, Heart10, HeartJ, HeartQ, HeartK,
-  SpadeA, Spade2, Spade3, Spade4, Spade5, Spade6, Spade7, Spade8, Spade9, Spade10, SpadeJ, SpadeQ, SpadeK,
-  DiamondA, Diamond2, Diamond3, Diamond4, Diamond5, Diamond6, Diamond7, Diamond8, Diamond9, Diamond10, DiamondJ, DiamondQ, DiamondK,
-  ClubA, Club2, Club3, Club4, Club5, Club6, Club7, Club8, Club9, Club10, ClubJ, ClubQ, ClubK,
+  Heart2, Heart3, Heart4, Heart5, Heart6, Heart7, Heart8, Heart9, Heart10, HeartJ, HeartQ, HeartK, HeartA, 
+  Spade2, Spade3, Spade4, Spade5, Spade6, Spade7, Spade8, Spade9, Spade10, SpadeJ, SpadeQ, SpadeK, SpadeA, 
+  Diamond2, Diamond3, Diamond4, Diamond5, Diamond6, Diamond7, Diamond8, Diamond9, Diamond10, DiamondJ, DiamondQ, DiamondK, DiamondA, 
+  Club2, Club3, Club4, Club5, Club6, Club7, Club8, Club9, Club10, ClubJ, ClubQ, ClubK, ClubA, 
 }
 const CardFactory = (cardType: CardType, position: string = 'default') => {
-  const card = new Card(['bg-cover']);
+  const card = new Card(cardType, ['bg-cover']);
   const images = [
     //blank, jokera, jokerb
     "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    // hearta
-    "bg-[url('/assets/images/heart-A.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-3.png')]",
-    "bg-[url('/assets/images/heart-4.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-9.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-J.png')]", "bg-[url('/assets/images/heart-Q.png')]",
-    "bg-[url('/assets/images/card-back.png')]",
-    // spadea
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-3.png')]",   
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-6.png')]",
+    // heart2
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-3.png')]", "bg-[url('/assets/images/heart-4.png')]", 
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-9.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/heart-J.png')]", "bg-[url('/assets/images/heart-Q.png')]", "bg-[url('/assets/images/card-back.png')]",
+    "bg-[url('/assets/images/heart-A.png')]",
+    // spade2
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-3.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-6.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
     "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]",
-    // diamonda
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/diamond-2.png')]", "bg-[url('/assets/images/diamond-3.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/diamond-5.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/diamond-10.png')]", "bg-[url('/assets/images/diamond-J.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]",
-    // cluba
+    "bg-[url('/assets/images/card-back.png')]", 
+    // diamond2
+    "bg-[url('/assets/images/diamond-2.png')]", "bg-[url('/assets/images/diamond-3.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/diamond-5.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
+    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/diamond-10.png')]", 
+    "bg-[url('/assets/images/diamond-J.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
+    "bg-[url('/assets/images/card-back.png')]", 
+    // club2
     "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
     "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
     "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
