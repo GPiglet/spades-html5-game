@@ -43,8 +43,6 @@ class DealGround {
       const card = CardFactory.create(CardType.Blank);
       const cardElement = card.getElement();
       cardElement.classList.add('absolute');
-      cardElement.style.top = `${Math.floor(0 - i*10/52)}px`;
-      cardElement.style.left = `${Math.floor(0 - i*10/52)}px`;
       this.cards.push(card);
       this.cardWrapper.appendChild(card.getElement());
     }
@@ -75,9 +73,12 @@ class DealGround {
     // reposition cards in deal ground
     for ( let i = 0; i < 52; i++ )
     {
+      this.cards[i].show();
       const cardElement = this.cards[i].getElement();
       cardElement.style.top = `${Math.floor(0 - i*10/52)}px`;
       cardElement.style.left = `${Math.floor(0 - i*10/52)}px`;
+      cardElement.style.zIndex = '' + i;
+      gsap.set(cardElement, {rotate: 0});
     }
 
     // init players
@@ -106,7 +107,7 @@ class DealGround {
           rotate = 90;
           break;
       }
-      dealEffect.to(cardElement, {duration: 0.057, x: rect1.x - rect2.x, y: rect1.y - rect2.y, rotate, onComplete: ()=> {
+      dealEffect.to(cardElement, {duration: 0.057, left: rect1.x - rect2.x, top: rect1.y - rect2.y, rotate, onComplete: ()=> {
         card.hide();
         playerCard.show();
       }});
@@ -157,8 +158,10 @@ class DealGround {
   }
 
   onCompleteDeal() {
-
     this.hide();
+    this.players.forEach( (player) => {
+      if( player.isMine() ) player.playSortEffect();
+    })
   }
 
 }
