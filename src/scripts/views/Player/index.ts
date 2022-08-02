@@ -1,4 +1,6 @@
 import gsap from "gsap";
+import testController from "../../controllers/test";
+import BidPopover from "../Board/BidPopover";
 import CardFactory, { CardType } from '../Board/CardFactory';
 import Bubble from '../Widgets/Bubble';
 import Card from '../Widgets/Card';
@@ -11,8 +13,11 @@ class Player {
   cardWrapper: HTMLElement;
   cards: Array<Card>;
   position: string;
+  bidPopover: BidPopover | null = null;
 
   constructor(parent: HTMLElement | null, position: string, username: string, avatar: string) {
+    this.onSelectBid = this.onSelectBid.bind(this);
+    
     this.position = position;
     this.container = document.createElement('div');
     parent?.appendChild(this.container);
@@ -35,6 +40,7 @@ class Player {
         this.container.classList.add('left-1/2');
         this.container.classList.add('bottom-[25px]');
         this.container.classList.add('ml-[-25px]');
+        this.bidPopover = new BidPopover(parent, this.onSelectBid);
         break;
   
     }
@@ -154,8 +160,21 @@ class Player {
     });
   }
 
-  onCompleteSort() {
+  onSelectBid(level: number) {
+    //only for test
+    testController.onSelectBid(this, level);
+  }
 
+  showBidPopover() {
+    this.bidPopover?.show();
+  }
+
+  showBidNotify(index: number) {
+    this.bubble.show(`I bid ${index}`, false);
+  }
+
+  hideBidNotify() {
+    this.bubble.hide();
   }
 }
 
