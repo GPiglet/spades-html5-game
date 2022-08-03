@@ -26,6 +26,7 @@ module.exports = (env) => {
       }),
     ],
     optimization: {
+      minimize: false,
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
