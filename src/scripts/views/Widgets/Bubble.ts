@@ -21,25 +21,25 @@ class Bubble {
     
     switch( position ) {
       case 'top':
-        this.container.classList.add("bg-[url('/assets/images/speech-top.svg')]");
+        this.container.classList.add("bg-[url('../public/assets/images/speech-top.svg')]");
         this.container.classList.add('top-[32px]');
         this.container.classList.add('right-[42px]');
         this.wrapper.classList.add('mt-[40px]');
         break;
       case 'left':
-        this.container.classList.add("bg-[url('/assets/images/speech-left.svg')]");
+        this.container.classList.add("bg-[url('../public/assets/images/speech-left.svg')]");
         this.container.classList.add('bottom-[15px]');
         this.container.classList.add('left-[54px]');
         this.wrapper.classList.add('mt-[20px]');
         break;
       case 'right':
-        this.container.classList.add("bg-[url('/assets/images/speech-right.svg')]");
+        this.container.classList.add("bg-[url('../public/assets/images/speech-right.svg')]");
         this.container.classList.add('bottom-[15px]');
         this.container.classList.add('right-[54px]');
         this.wrapper.classList.add('mt-[20px]');
         break;
       case 'bottom':
-        this.container.classList.add("bg-[url('/assets/images/speech-left.svg')]");
+        this.container.classList.add("bg-[url('../public/assets/images/speech-left.svg')]");
         this.container.classList.add('bottom-[10px]');
         this.container.classList.add('left-[50px]');
         this.wrapper.classList.add('mt-[20px]');
