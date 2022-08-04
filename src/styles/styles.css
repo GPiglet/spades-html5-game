@@ -21,11 +21,12 @@
   }
 }
 .dealer::after {
-  content: url('/assets/images/dealerhat.svg');
+  content: url('../public/assets/images/dealerhat.svg');
   display: inline-block;
   width: 50px;
   position: absolute;
   top: -16px;
+  z-index: 31;
 }
 
 button {
@@ -86,5 +87,34 @@ button:hover {
 @media (min-width: 460px) {
   .sm-my-card-grid-col {
     grid-template-columns: repeat(13, 35px);
+  }
+}
+
+.result-table table #names-row {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.result-table table th {
+  font-weight: 700;
+  text-align: center;
+  border: solid 1px #000;
+  padding: 1px 2px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.result-table table td {
+  text-align: right;
+  border: solid 1px #000;
+  padding: 1px 2px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+@media (max-width: 730px) {
+
+  .scorecard-names {
+      max-width: 117px;
+      min-width: 68px;
   }
 }
