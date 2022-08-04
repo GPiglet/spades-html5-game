@@ -12,35 +12,36 @@ const CardFactory = (cardType: CardType, position: string = 'default') => {
   const card = new Card(cardType, ['bg-cover']);
   const images = [
     //blank, jokera, jokerb
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
+    "url('assets/images/card-back.png')", "url('assets/images/card-back.png')", "url('assets/images/card-back.png')",
     // heart2
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-3.png')]", "bg-[url('/assets/images/heart-4.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/heart-9.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/heart-J.png')]", "bg-[url('/assets/images/heart-Q.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/heart-A.png')]",
+    "url('assets/images/heart-2.png')", "url('assets/images/heart-3.png')", "url('assets/images/heart-4.png')", 
+    "url('assets/images/heart-5.png')", "url('assets/images/heart-6.png')", "url('assets/images/heart-7.png')", 
+    "url('assets/images/heart-8.png')", "url('assets/images/heart-9.png')", "url('assets/images/heart-10.png')", 
+    "url('assets/images/heart-J.png')", "url('assets/images/heart-Q.png')", "url('assets/images/heart-K.png')",
+    "url('assets/images/heart-A.png')",
     // spade2
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-3.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/spade-6.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", 
+    "url('assets/images/spade-2.png')", "url('assets/images/spade-3.png')", "url('assets/images/spade-4.png')", 
+    "url('assets/images/spade-5.png')", "url('assets/images/spade-6.png')", "url('assets/images/spade-7.png')", 
+    "url('assets/images/spade-8.png')", "url('assets/images/spade-9.png')", "url('assets/images/spade-10.png')", 
+    "url('assets/images/spade-J.png')", "url('assets/images/spade-Q.png')", "url('assets/images/spade-K.png')",
+    "url('assets/images/spade-A.png')", 
     // diamond2
-    "bg-[url('/assets/images/diamond-2.png')]", "bg-[url('/assets/images/diamond-3.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/diamond-5.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", 
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/diamond-10.png')]", 
-    "bg-[url('/assets/images/diamond-J.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", 
+    "url('assets/images/diamond-2.png')", "url('assets/images/diamond-3.png')", "url('assets/images/diamond-4.png')", 
+    "url('assets/images/diamond-5.png')", "url('assets/images/diamond-6.png')", "url('assets/images/diamond-7.png')", 
+    "url('assets/images/diamond-8.png')", "url('assets/images/diamond-9.png')", "url('assets/images/diamond-10.png')", 
+    "url('assets/images/diamond-J.png')", "url('assets/images/diamond-Q.png')", "url('assets/images/diamond-K.png')",
+    "url('assets/images/diamond-A.png')", 
     // club2
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]", "bg-[url('/assets/images/card-back.png')]",
-    "bg-[url('/assets/images/card-back.png')]",
+    "url('assets/images/club-2.png')", "url('assets/images/club-3.png')", "url('assets/images/club-4.png')",
+    "url('assets/images/club-5.png')", "url('assets/images/club-6.png')", "url('assets/images/club-7.png')",
+    "url('assets/images/club-8.png')", "url('assets/images/club-9.png')", "url('assets/images/club-10.png')",
+    "url('assets/images/club-J.png')", "url('assets/images/club-Q.png')", "url('assets/images/club-K.png')",
+    "url('assets/images/club-A.png')",
   ]
 
-  card.addClass(images[cardType]);
-
+  card.getElement().style.backgroundImage = images[cardType];
+  card.getElement().style.zIndex = '30';
+  card.getElement().classList.add('absolute');
   switch ( position ) {
     case 'top':
       card.addClass("w-[24px]");
@@ -70,6 +71,7 @@ const CardFactory = (cardType: CardType, position: string = 'default') => {
       break;
     case 'default':
     case 'bottom':
+      card.addClass("cursor-pointer");
       card.addClass("w-[69px]");
       card.addClass("h-[94px]");
       break;
