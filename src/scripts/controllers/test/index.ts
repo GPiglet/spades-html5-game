@@ -1,5 +1,10 @@
+import PlayGround from "../../views/Board";
+import { CardType } from "../../views/Board/CardFactory";
 import DealGround from "../../views/Board/DealGround";
+import resultPopover from "../../views/Board/ResultPopover";
 import Player from "../../views/Player";
+import Card from "../../views/Widgets/Card";
+import mainController, { GAME_STATE } from "../main";
 
 class TestController {
   isTestMode: boolean = false;
@@ -16,6 +21,14 @@ class TestController {
     this.isTestMode = false;
   }
 
+  initRound(playGround: PlayGround) {
+    if ( playGround.topCard && playGround.leftCard && playGround.rightCard && playGround.bottomCard )
+    {
+      setTimeout(() => {
+        playGround.onInitRound(Math.floor(Math.random()*4));
+      }, 1000);
+    }
+  }
 
   onBid(dealGround: DealGround) {
     if ( !this.isTestMode ) return;
@@ -41,11 +54,18 @@ class TestController {
       this.dealGround?.players.forEach(p => {
         p.hideBidNotify();
       })
+      mainController.setState(GAME_STATE.PLAY);
     }, 1000);
 
-    setTimeout(() => {
-      
-    }, 2000);
+  }
+
+  putOtherCard(player: Player, target: Card) {
+    const cardType = Math.floor(3+Math.random()*52);
+    player.putCard(cardType, player.cardList.cards.findIndex(c=>c==target));
+  }
+
+  checkFinish() {
+    if ( this.dealGround?.players[0].cardList.cards.length == 0 ) resultPopover.show();
   }
 }
 
