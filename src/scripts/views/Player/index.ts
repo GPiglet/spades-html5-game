@@ -1,19 +1,20 @@
-import gsap from "gsap";
 import testController from "../../controllers/test";
+import PlayGround from "../Board";
 import BidPopover from "../Board/BidPopover";
 import CardFactory, { CardType } from '../Board/CardFactory';
 import Bubble from '../Widgets/Bubble';
-import Card from '../Widgets/Card';
+import CardList from "./CardList";
+import ScorePad from "./ScorePad";
 
 class Player {
   container: HTMLElement;
   wrapper: HTMLElement;
   bubble: Bubble;
-  cardContainer: HTMLElement;
-  cardWrapper: HTMLElement;
-  cards: Array<Card>;
   position: string;
   bidPopover: BidPopover | null = null;
+  playGround: PlayGround | null = null;
+  scorePad: ScorePad;
+  cardList: CardList;
 
   constructor(parent: HTMLElement | null, position: string, username: string, avatar: string) {
     this.onSelectBid = this.onSelectBid.bind(this);
@@ -67,68 +68,16 @@ class Player {
     nameElement.classList.add('l-[55px]');
     nameElement.innerHTML = username;
 
-    // create bubble object
     this.bubble = new Bubble(this.wrapper, position);
-
-    // init card list
-    this.cards = [];
-    this.cardContainer = document.createElement('div');
-    parent?.appendChild(this.cardContainer);
-    this.cardContainer.classList.add('absolute');
-    this.cardContainer.classList.add('flex');
-    this.cardContainer.classList.add('justify-center');
-
-    this.cardWrapper = document.createElement('div');
-    this.cardContainer.appendChild(this.cardWrapper);
-    this.cardWrapper.classList.add('grid');
-
-    switch( position ) {
-      case 'top':
-        this.cardContainer.classList.add('w-full');
-        this.cardContainer.classList.add('top-[80px]');
-        this.cardWrapper.classList.add('sm-card-grid-col');
-        this.cardWrapper.classList.add('sm:md-card-grid-col');
-        this.cardWrapper.classList.add('rotate-180');
-        this.cardWrapper.classList.add('sm:ml-[50px]');
-        break;
-
-      case 'left':
-        this.cardContainer.classList.add('flex-col');
-        this.cardContainer.classList.add('h-full');
-        this.cardContainer.classList.add('left-[80px]');
-        this.cardWrapper.classList.add('sm-card-grid-row');
-        this.cardWrapper.classList.add('sm:md-card-grid-row');
-        this.cardWrapper.classList.add('sm:mb-[50px]');
-        break;
-
-      case 'right':
-        this.cardContainer.classList.add('flex-col');
-        this.cardContainer.classList.add('h-full');
-        this.cardContainer.classList.add('right-[80px]');
-        this.cardContainer.classList.add('mt-[23px]');
-        this.cardContainer.classList.add('xs:mt-[45px]');
-        this.cardContainer.classList.add('sm:mt-[50px]');        
-        this.cardWrapper.classList.add('sm-card-grid-row');
-        this.cardWrapper.classList.add('sm:md-card-grid-row');
-        this.cardWrapper.classList.add('rotate-180');
-        break;
-
-      case 'bottom':
-        this.cardContainer.classList.add('w-full');
-        this.cardContainer.classList.add('bottom-[80px]');
-        this.cardWrapper.classList.add('sm-my-card-grid-col');
-        this.cardWrapper.classList.add('mr-[50px]');
-        break;
-    }
+    this.scorePad = new ScorePad(parent, position);
+    this.cardList = new CardList(parent, position, this);
     
   }
 
   init() {
     this.removeDealer();
-    this.cards.forEach((card) => {
-      card.getElement().parentNode?.removeChild(card.getElement());
-    })
-    this.cards = [];
+    this.cardList.init();
+    this.scorePad.init();    
   }
 
   setDealer() {
@@ -141,8 +90,7 @@ class Player {
 
   addCard(cardType: CardType) {
     const card = CardFactory.create(cardType, this.position);
-    this.cards.push(card);
-    this.cardWrapper.appendChild(card.getElement());
+    this.cardList.addCard(card);
     return card;
   }
 
@@ -150,26 +98,8 @@ class Player {
     return this.position == 'bottom'
   }
 
-  playSortEffect() {
-    const originCards = [...this.cards];
-    this.cards.sort((a, b) => a.cardType-b.cardType).forEach( (card, i) => {
-      const cardElement = card.getElement();
-      cardElement.style.zIndex = '' + i;
-      const rect1 = originCards[i].getElement().getBoundingClientRect(), rect2 = cardElement.getBoundingClientRect();
-      gsap.to(cardElement, {duration: 0.8, x: rect1.x - rect2.x});
-    });
-
-    setTimeout(() => {
-      this.cards.forEach( (card, i) => {
-        const cardElement = card.getElement();
-        gsap.set(cardElement, {x: 0});
-        cardElement.style.zIndex = '0';
-      })
-
-      this.cards.forEach( (card, i) => {
-        this.cards[i] = card.copyDOMFrom(originCards[i]);
-      })
-    }, 1000);
+  sortCards() {
+    this.cardList.sortCards();
   }
 
   onSelectBid(level: number) {
@@ -183,10 +113,19 @@ class Player {
 
   showBidNotify(index: number) {
     this.bubble.show(`I bid ${index}`, false);
+    this.scorePad.setBid(index);
   }
 
   hideBidNotify() {
     this.bubble.hide();
+  }
+
+  putCard(cardType: CardType, index: number=-1) {
+    this.cardList.putCard(cardType, index);
+  }
+
+  setPlayGround(ground: PlayGround) {
+    this.playGround = ground;
   }
 }
 
