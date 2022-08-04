@@ -13,6 +13,7 @@ module.exports = (env) => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].[contenthash].bundle.js',
+      assetModuleFilename: 'assets/images/[name][ext][query]'
     },
     plugins: [
       new CleanWebpackPlugin(),
@@ -26,7 +27,7 @@ module.exports = (env) => {
       }),
     ],
     optimization: {
-      minimize: false,
+      // minimize: false,
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {

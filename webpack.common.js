@@ -25,36 +25,23 @@ module.exports = (env) => {
               options: {
                 importLoaders: 1,
                 sourceMap: isDev,
-                url: false,
+                // url: false,
               }
             },
             'postcss-loader'
           ]
         },
+
         {
           test: /\.ts(x)?$/,
           loader: 'ts-loader',
           exclude: /node_modules/
         },
-        // {
-        //   test: /\.svg$/,
-        //   use: 'file-loader'
-        // },
-        // {
-        //   test: /\.svg/,
-        //   type: 'asset/resource'
-        // },
-        // {
-        //   test: /\.png$/,
-        //   use: [
-        //     {
-        //       loader: 'url-loader',
-        //       options: {
-        //         mimetype: 'image/png'
-        //       }
-        //     }
-        //   ]
-        // },
+        {
+          test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+          type: "asset/resource",
+        },
+
       ]
     },
     plugins: [
