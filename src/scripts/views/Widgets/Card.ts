@@ -30,15 +30,10 @@ class Card {
     return this;
   }
 
-  copyDOMFrom(target: Card) {
-    let classes: string[] = [];
-    this.container.classList.forEach(v => {
-      classes.push(v);
-    })
-    const newCard = new Card(this.cardType, classes);
-    target.container.replaceWith(newCard.container);
-    return newCard;
+  destroy() {
+    this.container.parentNode?.removeChild(this.container);
   }
+
 }
 
 export default Card;
