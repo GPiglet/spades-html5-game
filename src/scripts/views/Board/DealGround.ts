@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import mainController, { GAME_STATE } from "../../controllers/main";
 import testController from "../../controllers/test";
 import Player from "../Player";
 import Card from "../Widgets/Card";
@@ -133,6 +134,7 @@ class DealGround {
   }
 
   Deal() {
+    mainController.setState(GAME_STATE.DEAL);
     //get from service
     const dealer: number = 2;
     const myCards: Array<CardType> = [
@@ -161,7 +163,7 @@ class DealGround {
   onCompleteDeal() {
     this.hide();
     this.players.forEach( (player) => {
-      if( player.isMine() ) player.playSortEffect();
+      if( player.isMine() ) player.sortCards();
     })
 
     //only for test
